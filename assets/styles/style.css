@@ -1,8 +1,14 @@
+@import url(../fonts/custom-font-icon/style.css);
+
 * {
   margin: 0;
   padding: 0;
-  border: 0;
   box-sizing: border-box;
+}
+
+:root {
+  --colorWhite: #fff;
+  --colorPurple: #7b79e2;
 }
 
 @keyframes fade {
@@ -16,8 +22,10 @@
 }
 
 body {
-  animation: fade 1s linear;
-  background-color: black;
+  font-family: 'Quicksand', sans-serif;
+  overflow-x: hidden;
+  animation: fade 2s linear;
+  background-color: #000;
 }
 
 main {
@@ -25,25 +33,116 @@ main {
 }
 
 .main-content {
+  position: relative;
   display: grid;
   grid-template: ". contentCol ."/ 1fr 4fr 1fr;
-  height: max-content;
+  color: var(--colorWhite);
 }
 
 .content-col {
+  z-index: 1;
   grid-area: contentCol;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  margin: 10% 0;
+  min-height: 100vh;
+  display: grid;
+  grid-template: "header header header header "
+    "education education education skills"
+    "experiences experiences experiences technologies"
+    "footer footer footer footer"/ 1fr 1fr 1fr 1fr;
 }
 
-.content-col h1 {
-  font-family: 'VT323', monospace;
-  font-size: 10rem;
-  font-weight: normal;
-  word-spacing: 1rem;
-  color: #00FF00;
+.content-col section {
+  padding-right: 5%;
+}
+
+/* MAIN SECTION > HEADER */
+
+.main-header {
+  grid-area: header;
+}
+
+.main-header h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.main-title-status {
+  font-size: 1.5rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--colorPurple);
+}
+
+h2,
+.step {
+  margin-bottom: 1rem;
+}
+
+.place {
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* MAIN SECTION > EDUCATION */
+
+.education-section {
+  grid-area: education;
+}
+
+.experience-section {
+  grid-area: experiences;
+}
+
+/* MAIN SECTION > SKILLS & TECHS */
+
+
+.skill-section {
+  grid-area: skills;
+}
+
+.tech-section {
+  grid-area: technologies;
+}
+
+.skill-section span,
+.tech-section span {
+  display: inline-block;
+  font-weight: 700;
+  padding: .5rem;
+  margin-bottom: .5rem;
+  border-radius: 5px;
+  background-color: var(--colorPurple);
+}
+
+/* MAIN SECTION > FOOTER */
+
+.main-footer {
+  grid-area: footer;
+}
+
+.main-content h2,
+.main-footer ul {
+  margin-bottom: 1rem;
+}
+
+.main-footer ul {
+  display: flex;
+}
+
+.main-footer li {
+  list-style: none;
+  margin-right: 20px;
+}
+
+.main-footer a {
+  font-size: 2rem;
+  text-decoration: none;
+  color: var(--colorWhite);
+}
+
+.main-footer a:hover {
+  color: var(--colorPurple);
 }
 
 /* GRID BACKGROUND */
@@ -52,6 +151,7 @@ main {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 0;
   display: grid;
   grid-template: 1fr / repeat(6, 1fr);
   width: 100%;
@@ -60,4 +160,26 @@ main {
 
 .bg-grid div:not(:first-child) {
   border-left: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* ----- MOBILE ----- */
+
+@media only screen and (max-width: 1000px) {
+  .content-col {
+    grid-template:
+      "header"
+      "education"
+      "experiences"
+      "skills"
+      "technologies"
+      "footer"/ 1fr;
+  }
+
+  .main-header h1 {
+    font-size: 2em;
+  }
+
+  .main-title-status {
+    font-size: 1.25rem;
+  }
 }
